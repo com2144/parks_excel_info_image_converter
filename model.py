@@ -10,9 +10,9 @@ from pprint import pprint
 
 class LoadConvertModel:
     def __init__(self):
-        url = 'https://rndtest.shotgrid.autodesk.com/'
-        script_names = 'script_psj'
-        script_key = '^paskzjpyknuijyzugkrbzo3F'
+        url = '{your host url}'
+        script_names = '{your script name}'
+        script_key = '{your script key}'
         self.sg = Shotgun(base_url=url, script_name=script_names, api_key=script_key)
 
         self.file_path = ''

@@ -105,6 +105,10 @@ class LoadConvertModel:
 
         if len(self.sequence) == 0:
             self.sequence = sequence_list
+        else:
+            self.sequence = None
+            self.sequence = sequence_list
+
 
         print('---------------------------------sequence information---------------------------------')
         pprint(self.sequence)
@@ -173,6 +177,9 @@ class LoadConvertModel:
                 print(f"Shot '{shot_code}' already exists. Skipping creation.")
 
         if len(self.shot) == 0:
+            self.shot = shot_list
+        else:
+            self.shot = None
             self.shot = shot_list
 
         print('---------------------------------shot information---------------------------------')

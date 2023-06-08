@@ -2,14 +2,26 @@ from PySide2.QtWidgets import *
 from PySide2.QtGui import *
 
 
-class ConvertView(QMainWindow):
+class LoadConvertView(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('EXR Converter')
+        self.setWindowTitle('Excel Converter')
 
         widget = QWidget()
         layout = QVBoxLayout()
         widget.setLayout(layout)
+
+        browse_line_layout = QHBoxLayout()
+
+        self.line_edit = QLineEdit()
+        self.line_edit.setPlaceholderText("Enter a xlsx file")
+        browse_line_layout.addWidget(self.line_edit)
+
+        self.browse_button = QPushButton('Browse')
+        self.browse_button.clicked.connect(self.browse_clicked)
+        browse_line_layout.addWidget(self.browse_button)
+
+        layout.addLayout(browse_line_layout)
 
         self.combo_box = QComboBox()
         layout.addWidget(self.combo_box)
@@ -19,7 +31,7 @@ class ConvertView(QMainWindow):
 
         button_layout = QHBoxLayout()
 
-        self.ok_button = QPushButton('OK')
+        self.ok_button = QPushButton('Ok')
         self.ok_button.clicked.connect(self.ok_clicked)
         button_layout.addWidget(self.ok_button)
 
@@ -35,17 +47,22 @@ class ConvertView(QMainWindow):
 
     def center_on_screen(self):
         screen_geometry = QGuiApplication.primaryScreen().geometry()
-        x = (screen_geometry.width() - self.width()) // 2
-        y = (screen_geometry.height() - self.height()) // 2
+        x = (screen_geometry.width() - self.width()) // 1.6
+        y = (screen_geometry.height() - self.height()) // 1.3
 
         self.move(x, y)
 
-    def ok_clicked(self):
+    @staticmethod
+    def ok_clicked():
         print('convert start')
 
     def cancel_clicked(self):
         print('work cancel')
         self.close()
+
+    @staticmethod
+    def browse_clicked():
+        print('find xlsx file')
 
     @staticmethod
     def message_box(message):
@@ -57,8 +74,17 @@ class ConvertView(QMainWindow):
         msg_box.exec_()
 
 
+class BrowseDialog(QFileDialog):
+    def __init__(self):
+        super().__init__()
+        self.setDirectory('/home/west/')
+        self.file_name, _ = self.getOpenFileName(self,
+                                                 "Select File",
+                                                 filter="Excel Files (*.xlsx);;CSV Files (*.csv)")
+
+
 if __name__ == '__main__':
     app = QApplication()
-    window = ConvertView()
+    window = LoadConvertView()
     window.show()
     app.exec_()

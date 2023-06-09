@@ -16,7 +16,7 @@ class LoadConvertModel:
         self.sg = Shotgun(base_url=url, script_name=script_names, api_key=script_key)
 
         self.file_path = ''
-        self.home_root = '/home/west/'
+        self.home_root = ''
 
         self.xlsx_data = []
 
@@ -49,6 +49,9 @@ class LoadConvertModel:
         self.file_path = path
 
     def data_info(self):
+        split_path = self.file_path.split('/')
+        self.home_root = os.sep.join(split_path[:3]) + os.sep
+
         workbook = openpyxl.load_workbook(self.file_path)
         worksheet = workbook.active
         header = [cell.value for cell in worksheet[1]]
@@ -99,6 +102,7 @@ class LoadConvertModel:
                 new_sequence = self.sg.create('Sequence', sequence_data)
                 sequence_list.append(new_sequence)
                 existing_sequence_codes.add(sequence_name)
+
             elif sequence_name is not None:
                 filters = [['project', 'is', {'type': 'Project', 'id': project_id}],
                            ['code', 'is', sequence_name]]
@@ -172,6 +176,7 @@ class LoadConvertModel:
                 new_shot = self.sg.create('Shot', shot_data)
                 shot_list.append(new_shot)
                 existing_shot_codes.add(shot_code)
+
             elif shot_code is not None:
                 for seq in self.sequence:
                     sequence_id = seq.get('id')

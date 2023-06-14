@@ -333,7 +333,7 @@ class LoadConvertModel:
 
 def main():
     test = LoadConvertModel()
-    test.set_file_path('/TD/show/excel/hanjin.xlsx')
+    test.set_file_path('/TD/dongjin/projects/gamja/production/scan/20221017_plate_scan/20221017_plate_scan.xlsx')
     test.data_info()
     test.get_project('hanjin')
     test.get_sequence_and_upload()

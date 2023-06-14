@@ -326,9 +326,9 @@ class LoadConvertModel:
                 self.sg.upload("Version", self.version.get('id'), self.mp4_file_path_list[index],
                                "sg_uploaded_movie")
 
-            print('---------------------------------version information---------------------------------')
-            pprint(self.version)
-            print('-------------------------------------------------------------------------------------')
+        print('---------------------------------version information---------------------------------')
+        pprint(self.version)
+        print('-------------------------------------------------------------------------------------')
 
 
 def main():
@@ -338,7 +338,6 @@ def main():
     test.get_project('hanjin')
     test.get_sequence_and_upload()
     test.get_shot_and_upload()
-    test.copy_file_action()
     test.video_uploader()
 
 
